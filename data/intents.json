@@ -83,77 +83,12 @@
             "responses": false
         },
         {
-            "tag": "note",
+            "tag": "assignments",
             "trigger": true,
             "patterns": [
-                "i want to create a note",
-                "create a note",
-                "make a note",
-                "i want to create another note"
-            ],
-            "responses": false
-        },
-        {
-            "tag": "readnote",
-            "trigger": true,
-            "patterns": [
-                "read my notes",
-                "can you read out my notes",
-                "read my note",
-                "will you read out my notes"
-            ],
-            "responses": false
-        },
-        {
-            "tag": "clearnote",
-            "trigger": true,
-            "patterns": [
-                "can you clear out my notes",
-                "clear notes",
-                "clear out my notes",
-                "i want to clear my notes"
-            ],
-            "responses": false
-        },
-        {
-            "tag": "compounds",
-            "trigger": true,
-            "patterns": [
-                "what elements does consist of",
-                "what does consist of",
-                "do you know what consist of"
-            ],
-            "responses": false
-        },
-        {
-            "tag": "togglelights",
-            "trigger": true,
-            "patterns": [
-                "can you turn my lights",
-                "change my lights to",
-                "change my lights to off",
-                "change my lights to on",
-                "can you turn my lights off",
-                "can you turn my lights on",
-                "can you turn off my lights",
-                "can you turn on my lights",
-                "its too dark",
-                "its dark in here"
-            ],
-            "responses": false
-        },
-        {
-            "tag": "togglefan",
-            "trigger": true,
-            "patterns": [
-                "can you turn my fan",
-                "change my fan to",
-                "change my fan to off",
-                "change my fan to on",
-                "can you turn my fan off",
-                "can you turn my fan on",
-                "can you turn off my fan",
-                "can you turn on my fan"
+                "what assignments do i have",
+                "do i have any school assignments",
+                "what should i do in school"
             ],
             "responses": false
         }

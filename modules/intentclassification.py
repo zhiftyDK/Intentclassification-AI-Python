@@ -104,12 +104,10 @@ def train():
     output_size = len(tags)
     
     print(input_size, output_size)
-    if os.path.exists("./data/model.bin"):
-        nl.load("./data/model.bin")
     net = nl.net.newff([[0, 1]]*input_size, [8, 8, output_size])
     print(len(net.layers))
     net.train(X_train, Y_train, epochs=num_epochs, show=15, goal=0.05)
-    net.save("./data/model.bin")
+    net.save("./data/model.net")
 
 def run(input):
     with open('data/intents.json', 'r') as json_data:
@@ -138,7 +136,7 @@ def run(input):
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
 
-    net = nl.load("./data/model.bin")
+    net = nl.load("./data/model.net")
     output = net.sim(X)
     output = np.asarray(output[0])
     idx = (np.abs(output - 1)).argmin()
