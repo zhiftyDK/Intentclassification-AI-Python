@@ -1,4 +1,4 @@
-import json, sys
+import json, sys, os
 import modules.trigger as trigger
 import modules.intentclassification as nn
 from modules.speak import speak
@@ -25,4 +25,5 @@ try:
             speak(message)
 
 except KeyboardInterrupt:
+    os.system("pip freeze > requirements.txt")
     print("Closing program!")
