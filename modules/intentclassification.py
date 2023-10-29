@@ -5,38 +5,10 @@ import numpy as np
 import json
 import neurolab as nl
 import random
-import os
-
-def tokenize(sentence):
-    """
-    split sentence into array of words/tokens
-    a token can be a word or punctuation character, or number
-    """
-    return nltk.word_tokenize(sentence)
-
-
-def stem(word):
-    """
-    stemming = find the root form of the word
-    examples:
-    words = ["organize", "organizes", "organizing"]
-    words = [stem(w) for w in words]
-    -> ["organ", "organ", "organ"]
-    """
-    return stemmer.stem(word.lower())
-
 
 def bag_of_words(tokenized_sentence, words):
-    """
-    return bag of words array:
-    1 for each known word that exists in the sentence, 0 otherwise
-    example:
-    sentence = ["hello", "how", "are", "you"]
-    words = ["hi", "hello", "I", "you", "bye", "thank", "cool"]
-    bag   = [  0 ,    1 ,    0 ,   1 ,    0 ,    0 ,      0]
-    """
     # stem each word
-    sentence_words = [stem(word) for word in tokenized_sentence]
+    sentence_words = [stemmer.stem(word.lower()) for word in tokenized_sentence]
     # initialize bag with 0 for each word
     bag = np.zeros(len(words), dtype=np.float32)
     for idx, w in enumerate(words):
@@ -59,7 +31,7 @@ def train():
         tags.append(tag)
         for pattern in intent["patterns"]:
             # tokenize each word in the sentence
-            w = tokenize(pattern)
+            w = nltk.word_tokenize(pattern)
             # add to our words list
             all_words.extend(w)
             # add to xy pair
@@ -67,14 +39,10 @@ def train():
 
     # stem and lower each word
     ignore_words = ["?", ".", "!"]
-    all_words = [stem(w) for w in all_words if w not in ignore_words]
+    all_words = [stemmer.stem(w.lower()) for w in all_words if w not in ignore_words]
     # remove duplicates and sort
     all_words = sorted(set(all_words))
     tags = sorted(set(tags))
-
-    # print(len(xy), "patterns")
-    # print(len(tags), "tags:", tags)
-    # print(len(all_words), "unique stemmed words:", all_words)
 
     tempOutputOneHot = []
     for i, element in enumerate(intents["intents"]):
@@ -120,17 +88,17 @@ def run(input):
         tags.append(tag)
         for pattern in intent["patterns"]:
             # tokenize each word in the sentence
-            w = tokenize(pattern)
+            w = nltk.word_tokenize(pattern)
             # add to our words list
             all_words.extend(w)
 
     # stem and lower each word
     ignore_words = ["?", ".", "!"]
-    all_words = [stem(w) for w in all_words if w not in ignore_words]
+    all_words = [stemmer.stem(w.lower()) for w in all_words if w not in ignore_words]
     # remove duplicates and sort
     all_words = sorted(set(all_words))
 
-    sentence = tokenize(input)
+    sentence = nltk.word_tokenize(input)
     X = bag_of_words(sentence, all_words)
     X = X.reshape(1, X.shape[0])
 
