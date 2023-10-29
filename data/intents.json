@@ -58,7 +58,8 @@
                 "tell me a joke",
                 "tell me something funny",
                 "do you know a joke",
-                "can you tell me another joke"
+                "can you tell me another joke",
+                "make me laugh"
             ],
             "responses": false
         },
@@ -68,7 +69,7 @@
             "patterns": [
                 "what is the weather like",
                 "can you tell me the weather",
-                "show me the weather"
+                "how is the weather"
             ],
             "responses": false
         },

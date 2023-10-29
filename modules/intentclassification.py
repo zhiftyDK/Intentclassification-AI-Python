@@ -103,9 +103,7 @@ def train():
     input_size = len(X_train[0])
     output_size = len(tags)
     
-    print(input_size, output_size)
     net = nl.net.newff([[0, 1]]*input_size, [8, 8, output_size])
-    print(len(net.layers))
     net.train(X_train, Y_train, epochs=num_epochs, show=15, goal=0.05)
     net.save("./data/model.net")
 
@@ -152,6 +150,7 @@ def run(input):
                 })
     else:
         return json.dumps({
+            "trigger": False,
             "error": "No prediction with good probability!",
-            "message": "I do not understand..."
+            "rnd_response": "I do not understand..."
         })

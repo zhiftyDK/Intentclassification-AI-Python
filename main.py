@@ -1,19 +1,26 @@
-import shutil, os, json
+import json, sys
+import modules.trigger as trigger
 import modules.intentclassification as nn
 from modules.speak import speak
-from modules.studieplus import getAssignments
+from modules.recognize import recognize
 
-# Remove pycache folder on run
-pycachepath = "./modules/__pycache__"
-if os.path.exists(pycachepath):
-    shutil.rmtree(pycachepath)
-os.system("pip freeze > requirements.txt")
+if "--train" in sys.argv:
+    nn.train()
+    exit()
+try:
+    while True:
+        question = recognize()
+        if len(question) == 0:
+            continue
+        print("Question: " + question)
+        response = json.loads(nn.run(question))
+        if response["trigger"]:
+            message = eval(f"trigger.{response['tag']}()")
+            print("Answer: " + message)
+            speak(message)
+        else:
+            print("Answer: " + response["rnd_response"])
+            speak(response["rnd_response"])
 
-response = json.loads(nn.run("What assignments do i currently have?"))
-print(response)
-if response["trigger"]:
-    print(response)
-else:
-    speak(response["rnd_response"])
-
-# nn.train()
+except KeyboardInterrupt:
+    print("Finishing program!")
