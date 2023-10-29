@@ -7,9 +7,7 @@ import neurolab as nl
 import random
 
 def bag_of_words(tokenized_sentence, words):
-    # stem each word
     sentence_words = [stemmer.stem(word.lower()) for word in tokenized_sentence]
-    # initialize bag with 0 for each word
     bag = np.zeros(len(words), dtype=np.float32)
     for idx, w in enumerate(words):
         if w in sentence_words: 
@@ -24,23 +22,16 @@ def train():
     all_words = []
     tags = []
     xy = []
-    # loop through each sentence in our intents patterns
     for intent in intents["intents"]:
         tag = intent["tag"]
-        # add to tag list
         tags.append(tag)
         for pattern in intent["patterns"]:
-            # tokenize each word in the sentence
             w = nltk.word_tokenize(pattern)
-            # add to our words list
             all_words.extend(w)
-            # add to xy pair
             xy.append((w, tag))
 
-    # stem and lower each word
     ignore_words = ["?", ".", "!"]
     all_words = [stemmer.stem(w.lower()) for w in all_words if w not in ignore_words]
-    # remove duplicates and sort
     all_words = sorted(set(all_words))
     tags = sorted(set(tags))
 
@@ -52,14 +43,11 @@ def train():
         one_hot[i] = 1
         tempOutputOneHot.append([one_hot, element["tag"]])
 
-    # create training data
     X_train = []
     Y_train = []
     for (pattern_sentence, tag) in xy:
-        # X: bag of words for each pattern_sentence
         bag = bag_of_words(pattern_sentence, all_words)
         X_train.append(bag)
-        # Y: one-hot encoding
         for element in tempOutputOneHot:
             if tag == element[1]:
                 Y_train.append(element[0])
@@ -84,18 +72,13 @@ def run(input):
 
     for intent in intents["intents"]:
         tag = intent["tag"]
-        # add to tag list
         tags.append(tag)
         for pattern in intent["patterns"]:
-            # tokenize each word in the sentence
             w = nltk.word_tokenize(pattern)
-            # add to our words list
             all_words.extend(w)
 
-    # stem and lower each word
     ignore_words = ["?", ".", "!"]
     all_words = [stemmer.stem(w.lower()) for w in all_words if w not in ignore_words]
-    # remove duplicates and sort
     all_words = sorted(set(all_words))
 
     sentence = nltk.word_tokenize(input)
