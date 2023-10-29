@@ -7,6 +7,7 @@ from modules.recognize import recognize
 if "--train" in sys.argv:
     nn.train()
     exit()
+
 try:
     while True:
         question = recognize()
@@ -23,4 +24,4 @@ try:
             speak(response["rnd_response"])
 
 except KeyboardInterrupt:
-    print("Finishing program!")
+    print("Closing program!")
