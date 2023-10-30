@@ -3,10 +3,16 @@ import modules.trigger as trigger
 import modules.intentclassification as nn
 from modules.speak import speak
 from modules.recognize import recognize
+from modules.reminders import createReminder, readReminders
 
 if "--train" in sys.argv:
     nn.train()
     exit()
+
+if "--test" in sys.argv:
+    createReminder()
+    createReminder()
+    readReminders()
 
 try:
     while True:

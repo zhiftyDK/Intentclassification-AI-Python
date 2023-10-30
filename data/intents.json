@@ -79,7 +79,19 @@
             "patterns": [
                 "what is the time right now",
                 "what is the time",
+                "what time is it",
                 "can you tell me the time"
+            ],
+            "responses": false
+        },
+        {
+            "tag": "date",
+            "trigger": true,
+            "patterns": [
+                "what is the current date",
+                "what date is it",
+                "what is the date",
+                "can you tell me the date"
             ],
             "responses": false
         },
