@@ -30,7 +30,7 @@ def weather():
     tempValue = response.json()["main"]["temp"]
     nameValue = response.json()["name"]
     descValue = response.json()["weather"][0]["main"]
-    return f"In {nameValue} it is {str(tempValue)[:2]} degrees and {descValue}"
+    return f"In {nameValue} it is {str(tempValue).split('.')[0]} degrees and {descValue}"
 
 def assignments():
     return "I dont know check for yourself!"
